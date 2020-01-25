@@ -10,11 +10,9 @@
 
         public string Gas { get; set; }
 
-        public string GasPrice { get; set; }
-
         public string Hash { get; set; }
 
-        public string TransactionIndex { get; set; }
+        public string To { get; set; }
 
         public string Value { get; set; }
     }

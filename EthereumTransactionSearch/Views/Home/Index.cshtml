@@ -24,11 +24,10 @@
                 <tr>
                     <th>Block Hash</th>
                     <th>Block Number</th>
-                    <th>From</th>
                     <th>Gas</th>
-                    <th>Gas Price</th>
                     <th>Hash</th>
-                    <th>Transaction Index</th>
+                    <th>From</th>
+                    <th>To</th>
                     <th>Value</th>
                 </tr>
             </thead>
@@ -64,11 +63,10 @@
                         var rows = "<tr>" +
                             "<td id='BlockHash'>" + item.blockHash + "</td>" +
                             "<td id='BlockNumber'>" + item.blockNumber + "</td>" +
-                            "<td id='From'>" + item.from + "</td>" +
                             "<td id='Gas'>" + item.gas + "</td>" +
-                            "<td id='GasPrice'>" + item.gasPrice + "</td>" +
                             "<td id='Hash'>" + item.hash + "</td>" +
-                            "<td id='TransactionIndex'>" + item.transactionIndex + "</td>" +
+                            "<td id='From'>" + item.from + "</td>" +
+                            "<td id='To'>" + item.to + "</td>" +
                             "<td id='Value'>" + item.value + "</td>" +
                             "</tr>";
                         $('#Table').append(rows);
