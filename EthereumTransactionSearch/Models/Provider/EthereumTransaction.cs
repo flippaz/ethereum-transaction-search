@@ -1,17 +1,5 @@
-﻿using System.Collections.Generic;
-
-namespace EthereumTransactionSearch.Models
+﻿namespace EthereumTransactionSearch.Models.Provider
 {
-    public class EthereumDetail
-    {
-        public EthereumResult Result { get; set; }
-    }
-
-    public class EthereumResult
-    {
-        public IEnumerable<EthereumTransaction> Transactions { get; set; }
-    }
-
     public class EthereumTransaction
     {
         public string BlockHash { get; set; }

@@ -9,13 +9,17 @@
 
 <div class="panel panel-primary">
     <div class="panel-heading">
+
+    </div>
+    <div class="panel-body">
         Block Number: <input type="text" id="BlockNumber" />
         Address: <input type="text" id="Address" />
         <input type="button" id="GetData" value="Search" /> <br />
         <br />
-    </div>
-    <div class="panel-body">
-        <table class="table table-bordered" id="Table" style="display:none;">
+        <div id="loading" style="display: none;">
+            <img id="loading-image" src="~/images/ajax-loader.gif" alt="Loading..." />
+        </div>
+        <table class="table table-bordered" id="Table" style="display: none;">
             <thead>
                 <tr>
                     <th>Block Hash</th>
@@ -38,14 +42,21 @@
     $(document).ready(function () {
 
         $("#GetData").click(function () {
-            $("#Table").show();
+            if (!$("#BlockNumber").val()) {
+                alert('Please enter a Block Number.');
+                return false;
+            }
+
+            $("#loading").show();
+            $("#Table").hide();
+
             $.ajax({
                 type: "GET",
                 url: "/api/transaction/" + $("#BlockNumber").val() + "?address=" + $("#Address").val(),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-                    $('#Table tbody').empty();
+                    $("#Table tbody").empty();
 
                     $("#DIV").html('');
                     var DIV = '';
@@ -63,6 +74,9 @@
                         $('#Table').append(rows);
                     }); //End of foreach Loop
                     console.log(data);
+
+                    $("#loading").hide();
+                    $("#Table").show();
                 }, //End of AJAX Success function
 
                 failure: function (data) {
@@ -71,9 +85,7 @@
                 error: function (data) {
                     alert(data.responseText);
                 } //End of AJAX error function
-
             });
-
         });
     });
 </script>
