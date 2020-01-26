@@ -1,5 +1,5 @@
 using EthereumTransactionSearch.Clients;
-using EthereumTransactionSearch.Filters;
+using EthereumTransactionSearch.Extensions;
 using EthereumTransactionSearch.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -50,11 +50,8 @@ namespace EthereumTransactionSearch
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddControllersWithViews(options => { options.Filters.Add<ExceptionFilter>(); })
-                .AddJsonOptions(options => { options.JsonSerializerOptions.IgnoreNullValues = true; }); ;
-
-            services
                 .AddOptions()
+                .AddMvcServices()
                 .AddServices()
                 .AddEthereumApiClient(Configuration);
         }
