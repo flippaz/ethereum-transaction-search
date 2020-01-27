@@ -7,8 +7,12 @@ namespace EthereumTransactionSearch.Api.Tests.TestDoubles
 {
     public class NotImplementedEthereumApiClient : IEthereumApiClient
     {
+        public int RetryCount { get; set; }
+
         public virtual Task<EthereumResponse> GetAllTransactionsByBlockNumber(string blockNumber)
         {
+            RetryCount++;
+
             throw new NotImplementedException();
         }
     }

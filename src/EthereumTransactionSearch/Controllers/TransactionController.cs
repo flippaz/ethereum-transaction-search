@@ -18,7 +18,7 @@ namespace EthereumTransactionSearch.Controllers
         [HttpGet("{blockNumber}")]
         public async Task<IActionResult> GetTransactions(string blockNumber, [FromQuery]string address)
         {
-            if (!blockNumber.StartsWith("0x") || address == null || !address.StartsWith("0x"))
+            if (!blockNumber.StartsWith("0x") || (address != null && !address.StartsWith("0x")))
             {
                 return new BadRequestObjectResult("Block Number and/or Address must start with 0x");
             }

@@ -15,7 +15,7 @@ namespace EthereumTransactionSearch.Api.Tests.Fixtures
                 .AddLogging()
                 .AddMvcServices()
                 .AddServices()
-                .AddEthereumApiClientStub()
+                .AddNotImplementedEthereumApiClient()
                 .AddTransient<TransactionController>();
 
             overrides?.Invoke(services);

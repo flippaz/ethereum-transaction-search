@@ -5,10 +5,10 @@ namespace EthereumTransactionSearch.Api.Tests.TestDoubles
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddEthereumApiClientStub(this IServiceCollection services)
+        public static IServiceCollection AddNotImplementedEthereumApiClient(this IServiceCollection services)
         {
             return services
-                .AddSingleton<IEthereumApiClient, EthereumApiClientStub>();
+                .AddSingleton<IEthereumApiClient, NotImplementedEthereumApiClient>();
         }
     }
 }
