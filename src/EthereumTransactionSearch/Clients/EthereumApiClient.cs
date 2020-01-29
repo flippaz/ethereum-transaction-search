@@ -1,8 +1,6 @@
-﻿using EthereumTransactionSearch.Exceptions;
-using EthereumTransactionSearch.Extensions;
+﻿using EthereumTransactionSearch.Extensions;
 using EthereumTransactionSearch.Models.Provider;
 using EthereumTransactionSearch.ReferenceData;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
@@ -18,10 +16,9 @@ namespace EthereumTransactionSearch.Clients
         private const string JsonRpc2 = "2.0";
         private const bool ShowTransactionDetails = true;
         private readonly HttpClient _httpClient;
-        private readonly ILogger<EthereumApiClient> _logger;
         private readonly string _projectId;
 
-        public EthereumApiClient(IOptions<EthereumApiClientSettings> settings, ILogger<EthereumApiClient> logger)
+        public EthereumApiClient(IOptions<EthereumApiClientSettings> settings)
         {
             _httpClient = new HttpClient
             {
@@ -29,7 +26,6 @@ namespace EthereumTransactionSearch.Clients
                 Timeout = TimeSpan.FromMinutes(5)
             };
             _projectId = settings.Value.ProjectId;
-            _logger = logger;
         }
 
         public async Task<EthereumResponse> GetAllTransactionsByBlockNumber(string blockNumber)

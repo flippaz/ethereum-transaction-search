@@ -1,5 +1,4 @@
 ﻿using EthereumTransactionSearch.Api.Tests.Builders;
-using EthereumTransactionSearch.Api.Tests.TestDoubles;
 using EthereumTransactionSearch.Clients;
 using EthereumTransactionSearch.Controllers;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace EthereumTransactionSearch.Api.Tests.Fixtures
