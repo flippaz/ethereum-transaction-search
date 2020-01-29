@@ -3,6 +3,15 @@ The Ethereum Transaction Service allows searching an Ethereum block for all tran
 
 | Block Hash | Block Number | Gas | Hash | From | To | Value |
 
+Result Fields
+- `Block Hash`: 32 Bytes - hash of the block where this transaction was in. null when its pending.
+- `Block NUmber`: block number where this transaction was in. null when its pending.
+- `Gas`: gas provided by the sender.
+- `Hash`: 32 Bytes - hash of the transaction.
+- `From`: 20 Bytes - address of the sender.
+- `To`: 20 Bytes - address of the receiver. null when its a contract creation transaction.
+- `Value`: value transferred in Wei.
+
 ## Requirements and set up
 The `dotnetcore3.1` sdk is required to run the application and execute tests. Installation can be found [here](https://dotnet.microsoft.com/download).
 
