@@ -37,14 +37,17 @@ namespace EthereumTransactionSearch.Api.Tests
             [Fact]
             public void It_Retries_And_Throws_Exception()
             {
+                TimeSpan[] retryIntervals = { TimeSpan.FromMilliseconds(0), TimeSpan.FromMilliseconds(0), TimeSpan.FromMilliseconds(0) };
                 var ethereumApiClient = new NotImplementedEthereumApiClient();
+
                 var fixture = new GetTransactionsFixture()
-                    .WithEthereumApiClient(ethereumApiClient);
+                    .WithEthereumApiClient(ethereumApiClient)
+                    .WithEthereumApiRetryIntervals(retryIntervals);
 
                 Assert.ThrowsAsync<Exception>(
                     () => fixture.GetTransactions(RandomBuilder.NextHexString(), null));
 
-                Assert.Equal(1, ethereumApiClient.RetryCount);
+                Assert.Equal(4, ethereumApiClient.RetryCount);
             }
         }
 
