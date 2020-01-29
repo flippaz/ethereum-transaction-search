@@ -3,13 +3,14 @@ using EthereumTransactionSearch.Api.Tests.Builders.Provider;
 using EthereumTransactionSearch.Api.Tests.Fixtures;
 using EthereumTransactionSearch.Api.Tests.TestDoubles;
 using EthereumTransactionSearch.Api.Tests.TheoryData;
+using EthereumTransactionSearch.Exceptions;
+using EthereumTransactionSearch.Models.Provider;
+using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using EthereumTransactionSearch.Models.Provider;
-using FluentAssertions;
 using Xunit;
 
 namespace EthereumTransactionSearch.Api.Tests
@@ -32,10 +33,28 @@ namespace EthereumTransactionSearch.Api.Tests
             }
         }
 
+        public class And_An_Error_Response_Is_Returned_From_The_Provider
+        {
+            [Fact]
+            public void An_InvalidRequestException_Is_Thrown()
+            {
+                var ethereumApiClient = new EthereumApiClientStub()
+                    .WithTransactionsResponse(
+                        new EthereumResponseBuilder()
+                            .WithEthereumResult(null));
+
+                var fixture = new GetTransactionsFixture()
+                    .WithEthereumApiClient(ethereumApiClient);
+
+                Assert.ThrowsAsync<InvalidRequestException>(
+                    () => fixture.GetTransactions(RandomBuilder.NextHexString(), RandomBuilder.NextHexString()));
+            }
+        }
+
         public class And_Exception_Occurs_When_Calling_Provider
         {
             [Fact]
-            public void It_Retries_And_Throws_Exception()
+            public void It_Retries_Until_It_Throws_Exception()
             {
                 TimeSpan[] retryIntervals = { TimeSpan.FromMilliseconds(0), TimeSpan.FromMilliseconds(0), TimeSpan.FromMilliseconds(0) };
                 var ethereumApiClient = new NotImplementedEthereumApiClient();
@@ -59,7 +78,8 @@ namespace EthereumTransactionSearch.Api.Tests
                 var ethereumApiClient = new EthereumApiClientStub()
                     .WithTransactionsResponse(
                         new EthereumResponseBuilder()
-                            .WithEthereumResult(null));
+                            .WithEthereumResult(null)
+                            .WithEthereumError(null));
 
                 var fixture = new GetTransactionsFixture()
                     .WithEthereumApiClient(ethereumApiClient);

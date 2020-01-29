@@ -6,7 +6,15 @@ namespace EthereumTransactionSearch.Api.Tests.Builders.Provider
     {
         public EthereumResponseBuilder()
         {
+            WithEthereumError(new EthereumErrorBuilder());
             WithEthereumResult(new EthereumResultBuilder());
+        }
+
+        public EthereumResponseBuilder WithEthereumError(EthereumError error)
+        {
+            Error = error;
+
+            return this;
         }
 
         public EthereumResponseBuilder WithEthereumResult(EthereumResult result)

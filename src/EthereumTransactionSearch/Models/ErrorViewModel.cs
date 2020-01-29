@@ -1,5 +1,3 @@
-using System;
-
 namespace EthereumTransactionSearch.Models
 {
     public class ErrorViewModel

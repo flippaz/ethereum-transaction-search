@@ -18,5 +18,15 @@ namespace EthereumTransactionSearch.Api.Tests.Builders
                 return Random.Next();
             }
         }
+
+        public static string NextString()
+        {
+            return Guid.NewGuid().ToString();
+        }
+
+        public static string NextUrlString()
+        {
+            return $"http://{Guid.NewGuid():N}";
+        }
     }
 }

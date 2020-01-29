@@ -34,6 +34,11 @@ namespace EthereumTransactionSearch.Services
             EthereumResponse response = await _retryPolicy.ExecuteAsync(
                 async () => await _ethereumApiClient.GetAllTransactionsByBlockNumber(blockNumber));
 
+            if (response.Error != null)
+            {
+                throw new InvalidRequestException(response.Error.Message);
+            }
+
             IEnumerable<EthereumTransaction> allTransactions = response.Result?.Transactions;
 
             if (allTransactions != null && !string.IsNullOrWhiteSpace(address))

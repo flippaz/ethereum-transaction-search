@@ -55,12 +55,9 @@ namespace EthereumTransactionSearch.Clients
 
                     using (HttpResponseMessage response = await _httpClient.SendAsync(request).ConfigureAwait(false))
                     {
-                        string stringContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        response.EnsureSuccessStatusCode();
 
-                        if (stringContent.Contains("error"))
-                        {
-                            throw new InvalidRequestException(JsonConvert.DeserializeObject<EthereumErrorResponse>(stringContent).Error.Message);
-                        }
+                        string stringContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
                         return JsonConvert.DeserializeObject<EthereumResponse>(stringContent);
                     }

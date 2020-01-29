@@ -75,6 +75,7 @@ namespace EthereumTransactionSearch.Api.Tests.TheoryData
 
         public EthereumResponse EthereumResponse =>
             new EthereumResponseBuilder()
+                .WithEthereumError(null)
                 .WithEthereumResult(
                     new EthereumResultBuilder()
                         .WithTransactions(
