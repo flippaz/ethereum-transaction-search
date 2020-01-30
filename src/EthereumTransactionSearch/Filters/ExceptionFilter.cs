@@ -3,7 +3,6 @@ using EthereumTransactionSearch.Models.Api;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
-using System.ComponentModel.DataAnnotations;
 using System.Net;
 
 namespace EthereumTransactionSearch.Filters
@@ -25,15 +24,6 @@ namespace EthereumTransactionSearch.Filters
                     _logger.LogWarning(ex, ex.ErrorMessage);
 
                     context.Result = new ObjectResult(new ApiErrorResponse { Message = ex.ErrorMessage })
-                    {
-                        StatusCode = (int)HttpStatusCode.UnprocessableEntity
-                    };
-                    break;
-
-                case ValidationException ex:
-                    _logger.LogWarning(ex, ex.Message);
-
-                    context.Result = new ObjectResult(new ApiErrorResponse { Message = ex.Message })
                     {
                         StatusCode = (int)HttpStatusCode.UnprocessableEntity
                     };

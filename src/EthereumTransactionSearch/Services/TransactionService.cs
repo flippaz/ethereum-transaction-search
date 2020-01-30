@@ -57,7 +57,7 @@ namespace EthereumTransactionSearch.Services
         private AsyncRetryPolicy CreateRetryPolicy(IEnumerable<TimeSpan> retryIntervals, string errorMessage)
         {
             return Policy
-                .Handle<Exception>(ex => !(ex is NotFoundException))
+                .Handle<Exception>()
                 .WaitAndRetryAsync(retryIntervals, (exception, timeSpan) => _logger.LogWarning(0, exception, errorMessage));
         }
     }

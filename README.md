@@ -23,5 +23,6 @@ Set `ProjectId` within `appsettings.Development.json` if running from local deve
 ### Steps
 From within the solution folder, run the following commands to:
 
-1. Execute tests `dotnet test test\EthereumTransactionSearch.Tests\EthereumTransactionSearch.Api.Tests.csproj`
-2. Run the application `dotnet run -p src\EthereumTransactionSearch`
+1. Execute tests `dotnet test test\EthereumTransactionSearch.Tests\EthereumTransactionSearch.Api.Tests.csproj`.
+2. Run the application `dotnet run -p src\EthereumTransactionSearch`.
+3. Launch a web browser and navigate to `http:\\localhost:5000`.
